@@ -28,7 +28,7 @@ public class ExceptionHandler
 		return new ResponseEntity<>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	
+	//handling validation exceptions
 	@org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<?> customValidation(MethodArgumentNotValidException exception)
 	{
