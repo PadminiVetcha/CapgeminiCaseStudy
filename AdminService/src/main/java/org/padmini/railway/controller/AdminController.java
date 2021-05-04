@@ -31,14 +31,13 @@ public class AdminController
 	public TrainDetails getDetailsByTrainNo(@PathVariable Integer trainNo) 
 	{
 		return adminServiceImpl.getDetailsByTrainNo(trainNo);
-
-		
 	}
 	
 	@PostMapping("/add")
-	public void addTrainDetails(@Valid @RequestBody TrainDetails trainDetails)
+	public String addTrainDetails(@Valid @RequestBody TrainDetails trainDetails)
 	{
 		adminServiceImpl.addTrainDetails(trainDetails);
+		return ("Added train details with train number - "+trainDetails.getTrainNo()+" successfully..!!");
 	}
 	
 	@PutMapping("/update/{trainNo}")
