@@ -17,13 +17,13 @@ public class UserController
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 	
-	@GetMapping("/{id}")
+	@GetMapping("/book/{id}")
 	public UserDetails getUserDetailsById(@PathVariable Integer id)
 	{
 		return userServiceImpl.getUserDetailsById(id);
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/book/add")
 	public String addUserDetails(@Valid @RequestBody UserDetails userDetails)
 	{
 		//userDetails.setBookingId(sequenceGeneratorService)
