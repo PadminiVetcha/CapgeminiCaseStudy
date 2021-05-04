@@ -33,10 +33,11 @@ public class AdminServiceApplicationTests
 	@Mock
 	private AdminRepository adminRepo;
 	
-	/*
-	 * @BeforeAll public void init() { MockitoAnnotations.initMocks(this); }
-	 */
-	
+	@BeforeAll 
+	public void init()  { 
+		MockitoAnnotations.initMocks(this);
+	}
+	 
 	@Nested
 	@DisplayName("Testing getAllTrainDetails method")
 	class getAllDetailsTest
