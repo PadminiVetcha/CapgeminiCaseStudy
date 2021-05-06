@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
   
 @SuppressWarnings("deprecation")
 @EnableWebSecurity 
-public class UserConfiguration extends WebSecurityConfigurerAdapter 
+public class CancelUserConfiguration extends WebSecurityConfigurerAdapter 
 {
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception  { 
@@ -22,7 +22,7 @@ public class UserConfiguration extends WebSecurityConfigurerAdapter
 	  
 	  http.httpBasic()
 	  .and().authorizeRequests()
-	  	  .antMatchers("/user/add","/user/**").hasRole("USER")
+	  	  .antMatchers("/user/cancel/**","/user/cancel/all").hasRole("USER")
 	  	  //.antMatchers("/user/all").permitAll()
 	  	  .and().csrf().disable().headers().frameOptions().disable();
 	  	  //.formLogin(); 

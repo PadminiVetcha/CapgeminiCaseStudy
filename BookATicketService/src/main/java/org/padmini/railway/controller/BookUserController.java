@@ -1,5 +1,7 @@
 package org.padmini.railway.controller;
 import javax.validation.Valid;
+
+import org.padmini.railway.entity.PaymentDetails;
 import org.padmini.railway.entity.UserDetails;
 import org.padmini.railway.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +13,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user/book")
 public class BookUserController 
 {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 	
-	@GetMapping("/book/{id}")
-	public UserDetails getUserDetailsById(@PathVariable Integer id)
+	@GetMapping("/{pnrNo}")
+	public UserDetails getUserDetailsById(@PathVariable long pnrNo)
 	{
-		return userServiceImpl.getUserDetailsById(id);
+		return userServiceImpl.getUserDetailsById(pnrNo);
 	}
 	
-	@PostMapping("/book/add")
+	@PostMapping("/add")
 	public String addUserDetails(@Valid @RequestBody UserDetails userDetails)
 	{
-		//userDetails.setBookingId(sequenceGeneratorService)
 		userDetails.setId(UserServiceImpl.getNextSequence(userDetails.SEQUENCE_NAME));
+		userDetails.setPnrNo();
 		userServiceImpl.addUserDetails(userDetails);
-		return ("Your ticket id booked successfully...!!!"
-				+ "Your ref number is "+ userDetails.getId());
+		return ("Your ticket id booked successfully...!!!  "
+				+ "Your pnr number is "+ userDetails.getPnrNo());
 	}
 	/*
 	 * @GetMapping("/all") public List<TrainDetails> getAllTrainDetails() { return
 	 * userServiceImpl.getAllTrainDetails(); }
 	 */
-
+	
+	@PostMapping("/pay")
+	public String addPaymentDetails(@Valid @RequestBody PaymentDetails payment)
+	{
+		userServiceImpl.proceedToPay(payment);
+		return "Your payment is successful..!!";
+	}
+	
 }

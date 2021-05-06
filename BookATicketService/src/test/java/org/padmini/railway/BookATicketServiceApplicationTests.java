@@ -37,7 +37,7 @@ class BookATicketServiceApplicationTests {
 	public void addUserDetailsTest()
 	{
 		Passengers passengers = new Passengers(2, 4);
-		UserDetails details=new UserDetails("Padmini", 23, "Female", "Vzm", 12345, "Vishaka Express", "Vzm", "Vizag", "FirstClassAc", passengers);
+		UserDetails details=new UserDetails("Padmini", 23, "Female", "Vzm", 12345, "Vishaka Express", "Vzm", "Vizag", "FirstClassAc", passengers, "Pending");
 		userSerImpl.addUserDetails(details);
 		verify(userRepo,times(1)).save(details);
 	}
@@ -47,7 +47,7 @@ class BookATicketServiceApplicationTests {
 	public void getUserDetailsByIdTest()
 	{
 		Passengers passengers = new Passengers(2, 4);
-		Optional<UserDetails> details=Optional.of(new UserDetails("Padmini", 23, "Female", "Vzm", 12345, "Vishaka Express", "Vzm", "Vizag", "FirstClassAc", passengers));
+		Optional<UserDetails> details=Optional.of(new UserDetails("Padmini", 23, "Female", "Vzm", 12345, "Vishaka Express", "Vzm", "Vizag", "FirstClassAc", passengers,"Pending"));
 		when(userRepo.findById(1)).thenReturn(details);
 		UserDetails det=userSerImpl.getUserDetailsById(1);
 		assertEquals("Padmini", det.getName());

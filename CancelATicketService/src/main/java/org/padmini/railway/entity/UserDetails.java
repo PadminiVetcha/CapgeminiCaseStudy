@@ -2,8 +2,6 @@ package org.padmini.railway.entity;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,6 +11,7 @@ public class UserDetails
 {
 	@Transient
 	public static final String SEQUENCE_NAME = "users_sequence";
+	
 	
 	@Id
 	@NotNull
@@ -60,16 +59,12 @@ public class UserDetails
 	@NotNull
 	private Passengers passengers;
 	
-	@NotNull
-	@Value("Pending")
-	private String payment;
-	
 	public UserDetails() {
 		super();
 	}
 	
 	public UserDetails(String name,int age,String sex, String address,int trainNo,String trainName,
-			String startStation, String destStation,String classType, Passengers passengers,String payment) 
+			String startStation, String destStation,String classType, Passengers passengers) 
 	{
 		this.name = name;
 		this.age = age;
@@ -81,8 +76,9 @@ public class UserDetails
 		this.destStation = destStation;
 		this.classType = classType;
 		this.passengers = passengers;
-		this.payment=payment;
 	}
+
+	
 
 	public int getId() {
 		return id;
@@ -98,6 +94,7 @@ public class UserDetails
 
 	public void setPnrNo() {
 		long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+		System.out.println(number);
 		this.pnrNo = number;
 	}
 
@@ -181,19 +178,11 @@ public class UserDetails
 		this.passengers = passengers;
 	}
 
-	public String getPayment() {
-		return payment;
-	}
-
-	public void setPayment(String payment) {
-		this.payment = payment;
-	}
-
 	@Override
 	public String toString() {
 		return "UserDetails [id=" + id + ", pnrNo=" + pnrNo + ", name=" + name + ", age=" + age + ", sex=" + sex
 				+ ", address=" + address + ", trainNo=" + trainNo + ", trainName=" + trainName + ", startStation="
 				+ startStation + ", destStation=" + destStation + ", classType=" + classType + ", passengers="
-				+ passengers + ", payment=" + payment + "]";
+				+ passengers + "]";
 	}
 }
