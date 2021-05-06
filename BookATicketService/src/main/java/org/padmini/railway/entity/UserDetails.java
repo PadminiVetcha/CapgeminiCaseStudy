@@ -61,7 +61,6 @@ public class UserDetails
 	private Passengers passengers;
 	
 	@NotNull
-	@Value("Pending")
 	private String payment;
 	
 	public UserDetails() {

@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.padmini.railway.dao.UserRepository;
 import org.padmini.railway.entity.Passengers;
+import org.padmini.railway.entity.PaymentDetails;
 import org.padmini.railway.entity.UserDetails;
 import org.padmini.railway.service.UserServiceImpl;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,7 +38,8 @@ class BookATicketServiceApplicationTests {
 	public void addUserDetailsTest()
 	{
 		Passengers passengers = new Passengers(2, 4);
-		UserDetails details=new UserDetails("Padmini", 23, "Female", "Vzm", 12345, "Vishaka Express", "Vzm", "Vizag", "FirstClassAc", passengers, "Pending");
+		//PaymentDetails pay=new PaymentDetails("1234567887654321",123,"Bank of Baroda",678);
+		UserDetails details=new UserDetails("Padmini", 23, "Female", "Vzm", 12345, "Vishaka Express", "Vzm", "Vizag", "FirstClassAc", passengers,"Pending");
 		userSerImpl.addUserDetails(details);
 		verify(userRepo,times(1)).save(details);
 	}
@@ -47,9 +49,12 @@ class BookATicketServiceApplicationTests {
 	public void getUserDetailsByIdTest()
 	{
 		Passengers passengers = new Passengers(2, 4);
-		Optional<UserDetails> details=Optional.of(new UserDetails("Padmini", 23, "Female", "Vzm", 12345, "Vishaka Express", "Vzm", "Vizag", "FirstClassAc", passengers,"Pending"));
-		when(userRepo.findById(1)).thenReturn(details);
-		UserDetails det=userSerImpl.getUserDetailsById(1);
+		//PaymentDetails pay=new PaymentDetails("1234567887654321",123,"Bank of Baroda",678);
+		UserDetails details=new UserDetails("Padmini", 23, "Female", "Vzm", 12345, "Vishaka Express", "Vzm", "Vizag", "FirstClassAc", passengers,"pending");
+		long x=details.getPnrNo();
+		int y=details.getId();
+		when(userRepo.findById(y)).thenReturn(Optional.of(details));
+		UserDetails det=userSerImpl.getUserDetailsById(x);
 		assertEquals("Padmini", det.getName());
 		assertEquals(23, det.getAge());
 		assertEquals("Female", det.getSex());

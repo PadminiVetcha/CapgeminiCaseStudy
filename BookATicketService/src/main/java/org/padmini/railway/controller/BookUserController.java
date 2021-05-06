@@ -30,6 +30,7 @@ public class BookUserController
 	{
 		userDetails.setId(UserServiceImpl.getNextSequence(userDetails.SEQUENCE_NAME));
 		userDetails.setPnrNo();
+		userDetails.setPayment("Pending");
 		userServiceImpl.addUserDetails(userDetails);
 		return ("Your ticket id booked successfully...!!!  "
 				+ "Your pnr number is "+ userDetails.getPnrNo());
@@ -39,11 +40,12 @@ public class BookUserController
 	 * userServiceImpl.getAllTrainDetails(); }
 	 */
 	
-	@PostMapping("/pay")
-	public String addPaymentDetails(@Valid @RequestBody PaymentDetails payment)
-	{
-		userServiceImpl.proceedToPay(payment);
-		return "Your payment is successful..!!";
-	}
+	
+	  @PostMapping("/pay") 
+	  public String addPaymentDetails(@Valid @RequestBody
+	  PaymentDetails payment) { 
+		  userServiceImpl.proceedToPay(payment); 
+		  return "Your payment is successful..!!"; }
+	 
 	
 }
