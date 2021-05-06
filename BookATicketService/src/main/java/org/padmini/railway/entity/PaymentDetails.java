@@ -4,14 +4,16 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 public class PaymentDetails 
 {
-	@Id
+	
 	@NotNull
 	@Size(min=16,max=16,message="Card Number should of 16 digits")
 	private String cardNo;
+	
+	@Id
+	@NotNull
+	private long pnrNo;
 	
 	@NotNull
 	@Max(value=999,message="CVV cannot exceed 3 digits")
@@ -28,9 +30,10 @@ public class PaymentDetails
 		super();
 	}
 
-	public PaymentDetails(String cardNo, int cvv, String bankName, int amt) {
+	public PaymentDetails(String cardNo, long pnrNo,int cvv, String bankName, int amt) {
 		super();
 		this.cardNo = cardNo;
+		this.pnrNo=pnrNo;
 		this.cvv = cvv;
 		this.bankName = bankName;
 		this.amt = amt;
@@ -42,6 +45,14 @@ public class PaymentDetails
 
 	public void setCardNo(String cardNo) {
 		this.cardNo = cardNo;
+	}
+	
+	public long getPnrNo() {
+		return pnrNo;
+	}
+
+	public void setPnrNo(long pnrNo) {
+		this.pnrNo = pnrNo;
 	}
 
 	public int getCvv() {
@@ -70,6 +81,7 @@ public class PaymentDetails
 
 	@Override
 	public String toString() {
-		return "PaymentDetails [cardNo=" + cardNo + ", cvv=" + cvv + ", bankName=" + bankName + ", amt=" + amt + "]";
+		return "PaymentDetails [cardNo=" + cardNo + ", pnrNo=" + pnrNo + ", cvv=" + cvv + ", bankName=" + bankName
+				+ ", amt=" + amt + "]";
 	}
 }

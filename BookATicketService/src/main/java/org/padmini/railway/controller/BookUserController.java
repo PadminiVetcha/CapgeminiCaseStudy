@@ -41,10 +41,11 @@ public class BookUserController
 	 */
 	
 	
-	  @PostMapping("/pay") 
+	  @PostMapping("/pay/") 
 	  public String addPaymentDetails(@Valid @RequestBody
 	  PaymentDetails payment) { 
 		  userServiceImpl.proceedToPay(payment); 
+		  userServiceImpl.updateUserPaymentDetails(payment.getPnrNo());
 		  return "Your payment is successful..!!"; }
 	 
 	
