@@ -8,8 +8,7 @@ public interface UserService
 {
 	public List<UserDetails> getAll();
 	public UserDetails getUserDetailsById(long pnrNo);
-	public void addUserDetails(UserDetails userDetails);
+	public String addUserBookingDetails(UserDetails userDetails);
+	public String deleteUserBookingDetails(long pnrNo); 
 	public void proceedToPay(PaymentDetails payment);
-	public String deleteBookingDetails(long pnrNo); 
-	
 }

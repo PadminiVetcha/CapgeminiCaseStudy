@@ -7,10 +7,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-public class BookATicketServiceApplication {
+public class TicketMgmtServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookATicketServiceApplication.class, args);
+		SpringApplication.run(TicketMgmtServiceApplication.class, args);
 	}
 
 }

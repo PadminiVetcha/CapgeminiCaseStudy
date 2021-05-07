@@ -17,10 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user/book")
-public class BookUserController 
+public class TicketMgmtController 
 {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
+	
+	@GetMapping("/all")
+	public List<UserDetails> getAll()
+	{
+		return userServiceImpl.getAll();
+	}
 	
 	@GetMapping("/{pnrNo}")
 	public UserDetails getUserDetailsById(@PathVariable long pnrNo)
@@ -34,30 +40,21 @@ public class BookUserController
 		userDetails.setId(UserServiceImpl.getNextSequence(userDetails.SEQUENCE_NAME));
 		userDetails.setPnrNo();
 		userDetails.setPayment("Pending");
-		userServiceImpl.addUserDetails(userDetails);
-		return ("Your ticket id booked successfully...!!!  "
-				+ "Your pnr number is "+ userDetails.getPnrNo() + " Please proceed to payment....");
-	}
-	
-	@GetMapping("/all")
-	public List<UserDetails> getAll()
-	{
-		return userServiceImpl.getAll();
+		return userServiceImpl.addUserBookingDetails(userDetails);
+		
 	}
 	
 	@DeleteMapping("/{pnrNo}")
 	public String deleteUserDetailsById(@PathVariable long pnrNo)
 	{
-		return userServiceImpl.deleteBookingDetails(pnrNo);
+		return userServiceImpl.deleteUserBookingDetails(pnrNo);
 	}
 	
-	
-	  @PostMapping("/pay/") 
-	  public String addPaymentDetails(@Valid @RequestBody
-	  PaymentDetails payment) { 
+	 @PostMapping("/pay/") 
+	 public String addPaymentDetails(@Valid @RequestBody PaymentDetails payment) 
+	 { 
 		  userServiceImpl.proceedToPay(payment); 
 		  userServiceImpl.updateUserPaymentDetails(payment.getPnrNo());
-		  return "Your payment is successful..!!"; }
-	 
-	
+		  return "Your payment is successful..!!"; 
+	 }
 }

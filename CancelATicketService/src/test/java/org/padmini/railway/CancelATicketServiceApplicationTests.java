@@ -52,6 +52,5 @@ class CancelATicketServiceApplicationTests {
 		userSerImpl.deleteBookingDetails(1);
 		List<UserDetails> detailsListNew=userSerImpl.getAll();
 		assertEquals(0, detailsListNew.size());
-
 	}
 }
