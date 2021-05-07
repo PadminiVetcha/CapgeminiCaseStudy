@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class BookATicketServiceApplicationTests {
+class TicketMgmtServiceApplicationTests {
 
 	@InjectMocks
 	private UserServiceImpl userSerImpl;
