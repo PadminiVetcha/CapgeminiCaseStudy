@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user/book")
+@RequestMapping("/user")
 public class TicketMgmtController 
 {
 	@Autowired
@@ -34,7 +34,7 @@ public class TicketMgmtController
 		return userServiceImpl.getUserDetailsById(pnrNo);
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/book/add")
 	public String addUserDetails(@Valid @RequestBody UserDetails userDetails)
 	{
 		userDetails.setId(UserServiceImpl.getNextSequence(userDetails.SEQUENCE_NAME));
@@ -44,7 +44,7 @@ public class TicketMgmtController
 		
 	}
 	
-	@DeleteMapping("/{pnrNo}")
+	@DeleteMapping("/cancel/{pnrNo}")
 	public String deleteUserDetailsById(@PathVariable long pnrNo)
 	{
 		return userServiceImpl.deleteUserBookingDetails(pnrNo);
